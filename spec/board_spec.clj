@@ -3,7 +3,7 @@
         [ttt_clojure.board])
   (:require [ttt_clojure.board]))
 
-(describe "Truth"
+(describe "Board"
 
   (it "is empty"
     (should (board-empty? [[- - -] [- - - ] [- - -]])))
