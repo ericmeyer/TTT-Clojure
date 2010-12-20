@@ -2,7 +2,7 @@
 
 (defn -main [& args]
 	(prn "Enter a move")
-	(let [move (read-line)]        
+	(let [move (read-line)]
 		(prn (str "You entered: " move))))
-		
+
 (-main)
