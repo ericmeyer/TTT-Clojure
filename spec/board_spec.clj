@@ -43,6 +43,9 @@
 		(should (winner-exists? [["X" "X" "-"] ["-" "X" "X"] ["O" "-" "X"]])))
 	(it "has a winner if X completes the other diagonal"
 		(should (winner-exists? [["O" "X" "O"] ["-" "O" "X"] ["O" "-" "X"]])))
+		
+	(it "can make a move"
+		(should= [["-" "-" "-"] ["-" "X" "-"] ["-" "-" "-"]] (make-move (empty-board) [1 1] "X")))
 )
 
 (run-specs)

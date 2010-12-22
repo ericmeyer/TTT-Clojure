@@ -1,5 +1,8 @@
 (ns ttt_clojure.board)
 
+(defn empty-board []
+	[["-" "-" "-"] ["-" "-" "-"] ["-" "-" "-"]])
+	
 (defn board-empty? [board]
 	(every? #(= "-" %) (flatten board)))
 
@@ -36,3 +39,6 @@
 	
 (defn winner-exists? [board]
 	(or (winner-in-rows? board) (winner-in-columns? board) (winner-in-diagonal? board)))
+
+(defn make-move [board position marker]
+	(assoc-in board position marker))
