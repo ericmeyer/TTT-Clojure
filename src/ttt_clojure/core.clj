@@ -46,7 +46,7 @@
 
 (defn get-valid-move [board]
 	(prn "Go")
-	(def n (Integer/parseInt (read-line)))
+	(def n (- (Integer/parseInt (read-line)) 1))
 	[(int (/ n 3)) (rem n 3)])
 	
 (defn game-over? [board]
@@ -55,9 +55,14 @@
 (defn empty-board []
 	([["-" "-" "-"] ["-" "-" "-"] ["-" "-" "-"]]))
 	
+(defn print-board [board]
+	(prn (board 0))
+	(prn (board 1))
+	(prn (board 2)))
+		
 (defn take-next-turn [board]
 	(def new-board (make-move board (get-valid-move board) "X"))
-	(prn new-board)
+	(print-board new-board)
 	(if (not (game-over? new-board))
 		(take-next-turn new-board)))
 

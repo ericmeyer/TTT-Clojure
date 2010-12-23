@@ -46,6 +46,13 @@
 		
 	(it "can make a move"
 		(should= [["-" "-" "-"] ["-" "X" "-"] ["-" "-" "-"]] (make-move (empty-board) [1 1] "X")))
+		
+	(it "is game over when there is a winner"
+		(binding [winner-exists? (fn mock-winner-exists? [board] true)]
+			(should (game-over? (empty-board)))))
+	(it "is not game over when there is a winner"
+		(binding [winner-exists? (fn mock-winner-exists? [board] false)]
+			(should-not (game-over? (empty-board)))))
 )
 
 (run-specs)

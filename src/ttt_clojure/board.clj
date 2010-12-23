@@ -33,12 +33,17 @@
 (defn- winner-in-columns? [board]
 	(some #(winner-in-group? %) (columns board)))
 
-(defn- winner-in-diagonal? [board]
+(defn- winner-in-diagonals? [board]
 	(or (winner-in-group? [((board 0) 0) ((board 1) 1) ((board 2) 2)])
 			(winner-in-group? [((board 2) 0) ((board 1) 1) ((board 0) 2)])))
 	
 (defn winner-exists? [board]
-	(or (winner-in-rows? board) (winner-in-columns? board) (winner-in-diagonal? board)))
+	(or (winner-in-rows? board)
+			(winner-in-columns? board)
+			(winner-in-diagonals? board)))
 
 (defn make-move [board position marker]
 	(assoc-in board position marker))
+	
+(defn game-over? [board]
+	(winner-exists? board))
