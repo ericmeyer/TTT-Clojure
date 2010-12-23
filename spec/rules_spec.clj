@@ -17,7 +17,15 @@
 		(should (valid-move? [["-" "-" "-"] ["-" "-" "-"] ["-" "-" "-"]] 0 0)))
 	(it "is not a valid move if is is taken"
 		(should-not (valid-move? [["-" "X" "-"] ["-" "-" "-"] ["-" "-" "-"]] 0 1)))
-	
+	(it "is not valid if the row is too high"
+		(should-not (valid-move? (empty-board) 5 0)))
+	(it "is not valid if the row is too low"
+		(should-not (valid-move? (empty-board) -1 0)))
+	(it "is not valid if the col is too high"
+		(should-not (valid-move? (empty-board) 0 6)))
+	(it "is not valid if the col is too low"
+		(should-not (valid-move? (empty-board) 0 -1)))
+
 	(it "gets the first column"
 		(should= ["1" "4" "7"] (column 0 [["1" "2" "3"] ["4" "5" "6"] ["7" "8" "9"]])))
 	(it "gets the second column"

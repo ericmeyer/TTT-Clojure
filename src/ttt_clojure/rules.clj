@@ -9,8 +9,16 @@
 (defn- spot-empty? [board row col]
 	(= "-" ((board row) col)))
 	
+(defn- move-in-bounds? [board row col]
+	(and (< row (count (rows board)))
+			 (>= row 0)
+			 (< col (count (columns board)))
+			 (>= col 0)))
+	
 (defn valid-move? [board row col]
-	(spot-empty? board row col))
+	(and (move-in-bounds? board row col)
+			 (spot-empty? board row col)))
+			
 
 (defn- player-wins-in-group? [player group]
 	(every? #(= player %) group))
