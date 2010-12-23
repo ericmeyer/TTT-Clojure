@@ -34,39 +34,43 @@
 	(defn- winner-in-columns? [board]
 		(some #(winner-in-group? %) (columns board)))
 
-	(defn- winner-in-diagonal? [board]
+	(defn- winner-in-diagonals? [board]
 		(or (winner-in-group? [((board 0) 0) ((board 1) 1) ((board 2) 2)])
 				(winner-in-group? [((board 2) 0) ((board 1) 1) ((board 0) 2)])))
 	
 	(defn winner-exists? [board]
-		(or (winner-in-rows? board) (winner-in-columns? board) (winner-in-diagonal? board)))
+		(or (winner-in-rows? board)
+				(winner-in-columns? board)
+				(winner-in-diagonals? board)))
 
 	(defn make-move [board position marker]
-		(assoc-in board position marker))
-
+		(vec (assoc-in board position marker)))
+	
+	(defn game-over? [board]
+		(winner-exists? board))
 (defn get-valid-move [board]
 	(prn "Go")
 	(def n (- (Integer/parseInt (read-line)) 1))
 	[(int (/ n 3)) (rem n 3)])
 	
-(defn game-over? [board]
-	(winner-exists? board))
-	
-(defn empty-board []
-	([["-" "-" "-"] ["-" "-" "-"] ["-" "-" "-"]]))
 	
 (defn print-board [board]
 	(prn (board 0))
 	(prn (board 1))
 	(prn (board 2)))
-		
-(defn take-next-turn [board]
-	(def new-board (make-move board (get-valid-move board) "X"))
+
+(defn next-player [current-player]
+	(if (= "X" current-player)
+		"O"
+		"X"))
+				
+(defn take-next-turn [board current-player]
+	(def new-board (make-move board (get-valid-move board) current-player))
 	(print-board new-board)
 	(if (not (game-over? new-board))
-		(take-next-turn new-board)))
+		(take-next-turn new-board (next-player current-player))))
 
 (defn -main [& args]
-	(take-next-turn [["-" "-" "-"] ["-" "-" "-"] ["-" "-" "-"]]))
+	(take-next-turn (empty-board) "X"))
 
 (-main)
