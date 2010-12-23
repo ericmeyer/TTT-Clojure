@@ -1,7 +1,7 @@
-(ns board-spec
+(ns rules-spec
   (:use [speclj.core]
-        [ttt_clojure.board])
-  (:require [ttt_clojure.board]))
+        [ttt_clojure.rules])
+  (:require [ttt_clojure.rules]))
 
 (describe "Board"
   (it "is empty"

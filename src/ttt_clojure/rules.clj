@@ -1,4 +1,4 @@
-(ns ttt_clojure.board)
+(ns ttt_clojure.rules)
 
 (defn empty-board []
 	[["-" "-" "-"] ["-" "-" "-"] ["-" "-" "-"]])
