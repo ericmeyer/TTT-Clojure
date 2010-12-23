@@ -43,7 +43,7 @@
 			(winner-in-diagonals? board)))
 
 (defn make-move [board position marker]
-	(assoc-in board position marker))
+	(vec (assoc-in board position marker)))
 	
 (defn game-over? [board]
 	(winner-exists? board))

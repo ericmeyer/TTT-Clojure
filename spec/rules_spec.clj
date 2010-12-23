@@ -44,8 +44,13 @@
 	(it "has a winner if X completes the other diagonal"
 		(should (winner-exists? [["O" "X" "O"] ["-" "O" "X"] ["O" "-" "X"]])))
 		
-	(it "can make a move"
+	(it "makes a move"
 		(should= [["-" "-" "-"] ["-" "X" "-"] ["-" "-" "-"]] (make-move (empty-board) [1 1] "X")))
+	(it "makes a different move for a different player"
+		(should= [["-" "O" "-"] ["-" "-" "-"] ["-" "-" "-"]] (make-move (empty-board) [0 1] "O")))
+	(it "can makes a two moves"
+		(binding [board-with-move (make-move (empty-board) [1 1] "X")])
+		(should= [["-" "O" "-"] ["-" "X" "-"] ["-" "-" "-"]] (make-move board-with-move [0 1] "O")))
 		
 	(it "is game over when there is a winner"
 		(binding [winner-exists? (fn mock-winner-exists? [board] true)]
