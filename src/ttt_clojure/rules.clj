@@ -47,3 +47,8 @@
 	
 (defn game-over? [board]
 	(winner-exists? board))
+	
+(defn next-player [current-player]
+	(if (= "X" current-player)
+		"O"
+		"X"))

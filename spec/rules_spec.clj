@@ -58,6 +58,11 @@
 	(it "is not game over when there is a winner"
 		(binding [winner-exists? (fn mock-winner-exists? [board] false)]
 			(should-not (game-over? (empty-board)))))
+	
+	(it "has a next player for X"
+		(should= "O" (next-player "X")))
+	(it "has a next player for O"
+		(should= "X" (next-player "O")))
 )
 
 (run-specs)
