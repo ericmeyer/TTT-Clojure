@@ -1,68 +1,18 @@
-(ns ttt_clojure.core)
-;;	(:use [ttt_clojure.board])
-;;  (:require [ttt_clojure.board]))
-	(defn empty-board []
-		[["-" "-" "-"] ["-" "-" "-"] ["-" "-" "-"]])
-	
-	(defn board-empty? [board]
-		(every? #(= "-" %) (flatten board)))
+(ns ttt_clojure.core
+	(:use [ttt_clojure.rules])
+  (:require [ttt_clojure.rules]))
 
-	(defn- spot-empty? [board row col]
-		(= "-" ((board row) col)))
-	
-	(defn valid-move? [board row col]
-		(spot-empty? board row col))
-
-	(defn- player-wins-in-group? [player group]
-		(every? #(= player %) group))
-	
-	(defn- winner-in-group? [group]
-		(or (player-wins-in-group? "X" group) (player-wins-in-group? "O" group)))
-	
-	(defn column [n board]
-		(map #(% n) board))
-
-	(defn- columns [board]
-		(map #(column % board) (range (count board))))
-
-	(defn- rows [board]
-		board)
-	
-	(defn- winner-in-rows? [board]
-		(some #(winner-in-group? %) (rows board)))
-
-	(defn- winner-in-columns? [board]
-		(some #(winner-in-group? %) (columns board)))
-
-	(defn- winner-in-diagonals? [board]
-		(or (winner-in-group? [((board 0) 0) ((board 1) 1) ((board 2) 2)])
-				(winner-in-group? [((board 2) 0) ((board 1) 1) ((board 0) 2)])))
-	
-	(defn winner-exists? [board]
-		(or (winner-in-rows? board)
-				(winner-in-columns? board)
-				(winner-in-diagonals? board)))
-
-	(defn make-move [board position marker]
-		(vec (assoc-in board position marker)))
-	
-	(defn game-over? [board]
-		(winner-exists? board))
 (defn get-valid-move [board]
 	(prn "Go")
 	(def n (- (Integer/parseInt (read-line)) 1))
-	[(int (/ n 3)) (rem n 3)])
-	
+	(if (valid-move? board (int (/ n 3)) (rem n 3))
+		[(int (/ n 3)) (rem n 3)]
+		(get-valid-move board)))
 	
 (defn print-board [board]
 	(prn (board 0))
 	(prn (board 1))
 	(prn (board 2)))
-
-(defn next-player [current-player]
-	(if (= "X" current-player)
-		"O"
-		"X"))
 				
 (defn take-next-turn [board current-player]
 	(def new-board (make-move board (get-valid-move board) current-player))

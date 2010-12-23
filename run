@@ -1,1 +1,1 @@
-java -cp lib/clojure-1.2.0.jar clojure.main src/ttt_clojure/core.clj
+java -cp src:lib/clojure-1.2.0.jar clojure.main src/ttt_clojure/core.clj
