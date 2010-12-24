@@ -3,16 +3,18 @@
   (:require [ttt_clojure.rules]))
 
 (defn get-valid-move [board]
-	(prn "Go")
-	(def n (- (Integer/parseInt (read-line)) 1))
-	(if (valid-move? board (int (/ n 3)) (rem n 3))
-		[(int (/ n 3)) (rem n 3)]
+	(prn "Go X:")
+	(def x (Integer/parseInt (read-line)))
+	(prn "Go Y:")
+	(def y (Integer/parseInt (read-line)))
+	(if (valid-move? board x y)
+		[x y]
 		(get-valid-move board)))
 	
 (defn print-board [board]
-	(prn (board 0))
+	(prn (board 2))
 	(prn (board 1))
-	(prn (board 2)))
+	(prn (board 0)))
 				
 (defn take-next-turn [board current-player]
 	(def new-board (make-move board (get-valid-move board) current-player))
